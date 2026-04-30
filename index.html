@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Found In Between</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="map-bg"></div>
+
+  <!-- HOME -->
+  <div id="home" class="screen active">
+    <h1 class="home-title">FOUND IN BETWEEN</h1>
+    <div class="home-cols">
+
+      <div>
+        <div class="col-label">SEARCH BELOW</div>
+
+        <div class="category-item" onclick="toggleCat('design-labs', this)">
+          <div class="category-name">Design Labs <span class="arrow">›</span></div>
+          <div class="category-sub">(places of making)</div>
+          <div class="dropdown-locations" id="design-labs">
+            <div class="loc-item" onclick="goBuilding('Making Center','2 W 13th St',event)"><span class="loc-pin">📍</span> Making Center</div>
+            <div class="loc-item" onclick="goBuilding('Laser Lab','2 W 13th St – B1',event)"><span class="loc-pin">📍</span> Laser Lab</div>
+            <div class="loc-item" onclick="goBuilding('Woodshop','2 W 13th St – B2',event)"><span class="loc-pin">📍</span> Woodshop</div>
+            <div class="loc-item" onclick="goBuilding('3D Print Lab','2 W 13th St – L1',event)"><span class="loc-pin">📍</span> 3D Print Lab</div>
+            <div class="loc-item" onclick="goBuilding('Textiles Lab','39 W 13th St',event)"><span class="loc-pin">📍</span> Textiles Lab</div>
+            <div class="loc-item" onclick="goBuilding('Photography Lab','66 W 12th St',event)"><span class="loc-pin">📍</span> Photography Lab</div>
+            <div class="loc-item" onclick="goBuilding('Digital Fabrication Lab','2 W 13th St – L2',event)"><span class="loc-pin">📍</span> Digital Fabrication Lab</div>
+          </div>
+        </div>
+
+        <div class="category-item" onclick="toggleCat('student-housing', this)">
+          <div class="category-name">Student Housing <span class="arrow">›</span></div>
+          <div class="category-sub">(places of living)</div>
+          <div class="dropdown-locations" id="student-housing">
+            <div class="loc-item" onclick="goBuilding('Loeb Hall','100 Greenwich Ave',event)"><span class="loc-pin">📍</span> Loeb Hall</div>
+            <div class="loc-item" onclick="goBuilding('Stuyvesant Park Apts','345 E 15th St',event)"><span class="loc-pin">📍</span> Stuyvesant Park Apts</div>
+            <div class="loc-item" onclick="goBuilding('Union Square Residence','25 Union Square W',event)"><span class="loc-pin">📍</span> Union Square Residence</div>
+          </div>
+        </div>
+
+        <div class="category-item" onclick="toggleCat('academic', this)">
+          <div class="category-name">Academic Buildings <span class="arrow">›</span></div>
+          <div class="category-sub">(places of learning)</div>
+          <div class="dropdown-locations" id="academic">
+            <div class="loc-item" onclick="goBuilding('University Center','55 W 13th St',event)"><span class="loc-pin">📍</span> University Center</div>
+            <div class="loc-item" onclick="goBuilding('Kaplan Hall','66 W 12th St',event)"><span class="loc-pin">📍</span> Kaplan Hall</div>
+            <div class="loc-item" onclick="goBuilding('Arnhold Hall','55 W 13th St',event)"><span class="loc-pin">📍</span> Arnhold Hall</div>
+            <div class="loc-item" onclick="goBuilding('6 E 16th St','6 E 16th St',event)"><span class="loc-pin">📍</span> 6 E 16th St</div>
+            <div class="loc-item" onclick="goBuilding('80 Fifth Ave','80 Fifth Ave',event)"><span class="loc-pin">📍</span> 80 Fifth Ave</div>
+            <div class="loc-item" onclick="goBuilding('Sheila C. Johnson Design Center','66 Fifth Ave',event)"><span class="loc-pin">📍</span> Sheila C. Johnson Design Center</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-label">REPORT BELOW</div>
+        <div class="report-btns">
+
+          <div>
+            <div class="report-btn" onclick="toggleForm('lost-form', this)">
+              <div class="report-btn-title">I LOST SOMETHING <span class="form-arrow">›</span></div>
+              <div class="report-btn-sub">(describe what you lost, where, and when)</div>
+            </div>
+            <div class="inline-form" id="lost-form">
+              <div class="form-row">
+                <label class="form-label">What: <span class="form-hint">(Item info)</span></label>
+                <input type="text" class="form-input" id="h-lost-what" placeholder="Describe the item...">
+              </div>
+              <div class="form-row">
+                <label class="form-label">When: <span class="form-hint">(Last seen)</span></label>
+                <input type="datetime-local" class="form-input" id="h-lost-when">
+              </div>
+              <div class="form-row">
+                <label class="form-label">Where: <span class="form-hint">(Location or "can't recall")</span></label>
+                <input type="text" class="form-input" id="h-lost-where" placeholder="Eg. Kaplan Hall, Arnhold Hall...">
+              </div>
+              <div class="form-row">
+                <label class="form-label">Image: <span class="form-hint">(optional)</span></label>
+                <input type="file" accept="image/*" class="form-input form-file" onchange="previewImage(this,'prev-h-lost')">
+                <div class="image-preview" id="prev-h-lost"></div>
+              </div>
+              <button class="submit-btn" onclick="submitInline('lost','h-lost-what','h-lost-when','h-lost-where')">SUBMIT</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="report-btn" onclick="toggleForm('found-form', this)">
+              <div class="report-btn-title">I FOUND SOMETHING <span class="form-arrow">›</span></div>
+              <div class="report-btn-sub">(describe what you found, where, and when)</div>
+            </div>
+            <div class="inline-form" id="found-form">
+              <div class="form-row">
+                <label class="form-label">What: <span class="form-hint">(Item info)</span></label>
+                <input type="text" class="form-input" id="h-found-what" placeholder="Describe the item...">
+              </div>
+              <div class="form-row">
+                <label class="form-label">When: <span class="form-hint">(When found)</span></label>
+                <input type="datetime-local" class="form-input" id="h-found-when">
+              </div>
+              <div class="form-row">
+                <label class="form-label">Where: <span class="form-hint">(Location)</span></label>
+                <input type="text" class="form-input" id="h-found-where" placeholder="Eg. Kaplan Hall, Arnhold Hall...">
+              </div>
+              <div class="form-row">
+                <label class="form-label">Image: <span class="form-hint">(optional)</span></label>
+                <input type="file" accept="image/*" class="form-input form-file" onchange="previewImage(this,'prev-h-found')">
+                <div class="image-preview" id="prev-h-found"></div>
+              </div>
+              <button class="submit-btn" onclick="submitInline('found','h-found-what','h-found-when','h-found-where')">SUBMIT</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BUILDING -->
+  <div id="building" class="screen">
+    <button class="back-btn" onclick="goScreen('home')">← Back</button>
+    <div class="building-header">
+      <div class="building-title" id="bld-name">Kaplan Hall</div>
+      <div class="building-address" id="bld-addr">66 W 12th St</div>
+    </div>
+
+    <div class="action-row">
+      <div>
+        <div class="report-btn" onclick="toggleForm('bld-lost-form', this)">
+          <div class="report-btn-title">I LOST SOMETHING <span class="form-arrow">›</span></div>
+          <div class="report-btn-sub">(describe what you lost, where, and when)</div>
+        </div>
+        <div class="inline-form" id="bld-lost-form">
+          <div class="form-row">
+            <label class="form-label">What: <span class="form-hint">(Item info)</span></label>
+            <input type="text" class="form-input" id="b-lost-what" placeholder="Describe the item...">
+          </div>
+          <div class="form-row">
+            <label class="form-label">When: <span class="form-hint">(Last seen)</span></label>
+            <input type="datetime-local" class="form-input" id="b-lost-when">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Where: <span class="form-hint">(Floor, room...)</span></label>
+            <input type="text" class="form-input" id="b-lost-where" placeholder="e.g. 5th floor near elevator">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Image: <span class="form-hint">(optional)</span></label>
+            <input type="file" accept="image/*" class="form-input form-file" onchange="previewImage(this,'prev-b-lost')">
+            <div class="image-preview" id="prev-b-lost"></div>
+          </div>
+          <button class="submit-btn" onclick="submitInline('lost','b-lost-what','b-lost-when','b-lost-where')">SUBMIT</button>
+        </div>
+      </div>
+      <div>
+        <div class="report-btn" onclick="toggleForm('bld-found-form', this)">
+          <div class="report-btn-title">I FOUND SOMETHING <span class="form-arrow">›</span></div>
+          <div class="report-btn-sub">(describe what you found, where, and when)</div>
+        </div>
+        <div class="inline-form" id="bld-found-form">
+          <div class="form-row">
+            <label class="form-label">What: <span class="form-hint">(Item info)</span></label>
+            <input type="text" class="form-input" id="b-found-what" placeholder="Describe the item...">
+          </div>
+          <div class="form-row">
+            <label class="form-label">When: <span class="form-hint">(When found)</span></label>
+            <input type="datetime-local" class="form-input" id="b-found-when">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Where: <span class="form-hint">(Floor, room...)</span></label>
+            <input type="text" class="form-input" id="b-found-where" placeholder="e.g. 5th floor near elevator">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Image: <span class="form-hint">(optional)</span></label>
+            <input type="file" accept="image/*" class="form-input form-file" onchange="previewImage(this,'prev-b-found')">
+            <div class="image-preview" id="prev-b-found"></div>
+          </div>
+          <button class="submit-btn" onclick="submitInline('found','b-found-what','b-found-when','b-found-where')">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="bld-search" placeholder="Search..." oninput="filterActivity(this.value)">
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="section-label">RECENT ACTIVITY</div>
+    <div class="activity-list" id="activity-list"></div>
+  </div>
+
+  <!-- ITEM DETAIL -->
+  <div id="item-detail" class="screen">
+    <button class="back-btn" onclick="goScreen('building')">← Back</button>
+    <div class="detail-header">
+      <div class="detail-title" id="detail-title">Black Wallet Found</div>
+      <div class="detail-location" id="detail-loc">Kaplan Hall – 5th floor</div>
+    </div>
+    <div class="detail-card">
+      <div class="poster-row">
+        <div class="avatar">👤</div>
+        <div class="poster-email" id="detail-email">joey123@newschool.edu</div>
+      </div>
+      <div class="detail-image-box" id="detail-image-box">
+        <span class="detail-image-placeholder">📷 No image provided</span>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">What:</div>
+        <div class="detail-val" id="detail-what">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">Where:</div>
+        <div class="detail-val" id="detail-where">—</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-key">When:</div>
+        <div class="detail-val" id="detail-when">—</div>
+      </div>
+    </div>
+    <div class="detail-note">
+      If you believe this may belong to you, please reach out and provide a brief description or identifying details to confirm ownership before claiming it.
+    </div>
+    <div class="cta-row">
+      <button class="cta-btn" onclick="toggleDetailChat()">Get in touch →</button>
+      <div class="cta-hint">Sign in to get in touch</div>
+    </div>
+
+    <!-- INLINE CHAT -->
+    <div class="detail-chat-box" id="detail-chat-box">
+      <div class="detail-chat-header">CHAT</div>
+      <div class="detail-chat-messages" id="detail-chat-messages"></div>
+      <div class="detail-chat-input-row">
+        <input type="text" id="detail-chat-input" placeholder="Type a message...." onkeydown="sendDetailMsg(event)">
+        <button class="send-btn" onclick="sendDetailMsgClick()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+<!-- SUCCESS -->
+<div id="success" class="screen">
+  <button class="back-btn" onclick="goScreen('home')">← Back to Home</button>
+  <div class="success-screen">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Posted!</div>
+    <div class="success-text" id="success-text">Your report has been posted.<br>Staff and Others at this location will be notified.</div>
+    <div class="success-note">This is now a public post visible to everyone at this location.</div>
+    <br>
+    <button class="cta-btn" style="margin: 0 auto" onclick="viewPost()">See your post →</button>
+  </div>
+</div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
